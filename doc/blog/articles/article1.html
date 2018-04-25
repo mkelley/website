@@ -1,0 +1,112 @@
+<html>
+  <head>
+    <title>Blog: First Post</title>
+    
+  </head>
+  <body>
+    <h1>Blog: First Post</h1>
+<main>
+  <header>
+    <h2>First Post <small>An example</small></h2>
+<label>Tagged</label>
+<ul>
+  <li><a href="../tags/minimal.html">minimal</a></li>
+  <li><a href="../tags/example.html">example</a></li>
+  <li><a href="../tags/websites.html">websites</a></li>
+</ul>
+<label>Dated:</label> <time>2018-04-19</time>
+  </header>
+<article>
+  
+<h2>Blog configuration</h2>
+<p>Each blog is identified and configured with the <code>blogs</code> argument of the <code>Website</code> class.  It uses the following format:</p> <dl>
+  <dt><code>path</code></dt>
+  <dd>Path to the blog, relative to the website root.</dd>
+
+  <dt><code>title</code></dt>
+  <dd>Name of the blog.</dd>
+
+  <dt><code>article-path</code></dt>
+  <dd>Name of the sub-directory containing blog articles/entries.</dd>
+
+  <dt><code>templates</code></dt>
+  <dd>Defines which templates to use for auto-generated blog pages.</dd>
+</dl>
+<p>The <code>templates</code> parameter contains two items:</p>
+<dl>
+  <dt><code>naviation</code></dt>
+  <dd>Name of the blog navigation template. (optional)</dd>
+
+  <dt><code>article-list</code></dt>
+  <dd>Name of the template for generating article lists.</dd>
+</dl>  
+<h2>Article sources</h2>
+<p>Blog source files are located in a subdiretory of the blog defined in the configuration (see above).  Generated blog pages will have the following variables available in the template:</p>
+<dl>
+  <dt><code>page_title</code></dt>
+  <dd><code>title</code> from blog configuration.</dd>
+
+  <dt><code>page_subtitle</code></dt>
+  <dd><code>title</code> from the blog article.</dd>
+
+  <dt><code>prev</code></dt>
+  <dd>File name of the previous blog entry by date, or an empty string this is the first article.</dd>
+
+  <dt><code>next</code></dt>
+  <dd>File name of the next blog entry by date, or an empty string this is the last article.</dd>
+
+  <dt><code>blog_nav</code></dt>
+  <dd>The blog navigation.</dd>
+</dl>
+<p>Article links should be written relative to this location.  The blog index will be the most recent blog entry, located in the base blog path.  For example, if the blog configuration is: <code>path: blog, article-path: articles</code>, then the most recent entry will always be <code>blog/index.html</code>, but remaining articles will be located in <code>blog/articles/</code>.  The links will be corrected using HTML's <code>&lt;base&gt;</code> tag.  As a consequence, blog templates must include <code>{{ base_url }}</code> at the top of the HTML <code>&lt;head&gt;</code> tag:</b>
+<pre><code>&lt;html&gt;
+  &lt;head&gt;
+    {{ base_url }}
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Content with link assuming it located in
+    &lt;a href="./"&gt;articles&lt;/a&gt;.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>For implementations that use a common tempate for the blog and root site, it should be safe to use <code>{{ base_url }}</code> in the page header.</p>
+<h2>Article lists</h2>
+<p>A list of all articles is generated with the <code>article-list</code> template specified in the blog configuration, and saved to <code>{article-path}/index.html</code>. The same template is used to generate tag and date indices.</p>
+<p>The blog entries will be provided to the template in a list named <code>entries</code>.  Use the <code>filename</code> attribute and <code>basename</code> filter to create a link to each entry for the list:</p>
+<pre><code>&lt;ul&gt;
+  {% for entry in entries %}
+  &lt;li&gt;&lt;a href="../articles/{{ entry.filename|basename }}"&gt;{{ entry.title }}&lt;/a&gt;&lt;/li&gt;
+  {% endfor %}
+&lt;/ul&gt;</code></pre>
+<h2>Blog tags</h2>
+<p>Blog tags can (probably) use any characters allowed as a file name.  Tag index files are generated with filter named <code>filequote</code>.  This filter replaces spaces and slashes with the underscore character.  The index for the tag labeled <code>open spaces</code> will be <code>tags/open_spaces.html</code>.</p>
+<h2>Blog dates</h2>
+<p>Blog dates should be specified with a <code>date</code> parameter in the YAML source files using the YYYY-MM-DD format.</p>
+<h2>Blog navigation</h2>
+<p>Blog navigation is generated once and used on every blog page. Since the blog navigation can be in any blog directory (<code>{article-path}</code>, <code>tags</code>, or <code>dates</code>), blog links in the navigation should be written with a <code>../</code> prefix.  For example, blog tags could be programmed as the following list:</p>
+<pre><code>&lt;ul&gt;
+  {% for tag in tags %}
+  &lt;li&gt;&lt;a href="../tags/{{ tag|filequote }}"&gt;{{ tag }}&lt;a&gt;&lt;li&gt;
+  {% endfor %}
+&lt;ul&gt;</code></pre>
+</article>
+  <nav>
+  <h2>Navigation</h2>
+  <p>Take me to articles tagged:
+    <a href="../articles/">any</a>
+    <a href="../tags/example.html">example</a>
+    <a href="../tags/minimal.html">minimal</a>
+    <a href="../tags/websites.html">websites</a>
+  </p>
+  <p>Take me to articles with dates:
+    <ul class="blog-dates list-unstyled">
+      <li>2018
+	<ul>
+	  <li><a href="../dates/2018-04.html">Apr</a></li>
+	</ul>
+      </li>
+    </ul>
+  </p>
+</nav>
+</main>
+</body>
+</html>

@@ -1,0 +1,16 @@
+%YAML 1.2
+---
+draft: true
+template: blog-article.html
+title: Second Post
+subtitle: An example draft
+description: "Minimal working example for a draft blog post."
+date: 2018-04-22 10:00:00
+tags:
+  - minimal
+  - example
+  - websites
+  - draft
+author: Mike
+content: >-
+  <p>Whatever draft content goes here.</p>

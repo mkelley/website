@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>{{ page_title }}: {{ page_subtitle }}</title>
+    {{ base_url }}
+  </head>
+  <body>
+    <h1><a href="{{ root_path }}/index.html">Website Documentation</a></h1>
+    <h2>{{ page_title }}: {{ page_subtitle }}</h2>
+    {% block main %}
+    {% if main %}
+    <main>
+      {{ main }}
+    </main>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>

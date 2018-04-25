@@ -1,0 +1,42 @@
+%YAML 1.2
+---
+template: blog-article.html
+title: Blog configuration
+subtitle: An example
+description: "How to configure Website for a blog."
+date: 2018-04-19 10:00:00
+tags:
+  - blog
+  - configuration
+author: Mike
+content: >-
+
+  <p>Each blog is identified and configured with the
+  <code>blogs</code> argument of the <code>Website</code> class.  It
+  uses the following format:</p>
+  <dl>
+    <dt><code>path</code></dt>
+    <dd>Path to the blog, relative to the website root.</dd>
+
+    <dt><code>title</code></dt>
+    <dd>Name of the blog.</dd>
+
+    <dt><code>article-path</code></dt>
+    <dd>Name of the sub-directory containing blog articles/entries.</dd>
+
+    <dt><code>templates</code></dt>
+    <dd>Defines which templates to use for auto-generated blog pages.</dd>
+
+    <dt><code>data</code></dt>
+    <dd>Additional paramters to be passed to blog pages. (optional)</dd>
+  </dl>
+
+  <p>The <code>templates</code> parameter contains two items:</p>
+
+  <dl>
+    <dt><code>naviation</code></dt>
+    <dd>Name of the blog navigation template. (optional)</dd>
+
+    <dt><code>article-list</code></dt>
+    <dd>Name of the template for generating article lists.</dd>
+  </dl>  

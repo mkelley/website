@@ -1,0 +1,11 @@
+%YAML 1.2
+---
+template: base.html
+head_title: Website
+page_title: Example
+main: >-
+  <p>Example website with a <a href="blog/index.html">blog</a> and <a
+  href="newsletter/index.html">newsletter</a>.</p>
+
+  <p>The documentation is written as a series of blog entries, and an
+  <a href="blog/config/index.html">un-indexed summary page</a>.</p>

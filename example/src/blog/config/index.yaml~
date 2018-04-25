@@ -1,0 +1,24 @@
+%YAML 1.2
+---
+template: blog-article.html
+title: Summary
+subtitle: Example non-article blog page
+description: "Summary of blog and article configuration as a non-article page."
+content: >-
+
+  <p>Templated pages that are related to the blog, but are not
+  indexed articles, can be present in any blog sub-directory except
+  <code>articles</code>; <code>tags</code> and <code>dates</code>
+  should probably be avoided.</p>
+
+  <p>If they use the blog navigation, such as this page, then they
+  should be in a subdirectory of the blog path.</p>
+  
+  <h2>Table of contents</h2>
+  <ol>
+    <li><a href="../articles/blog-config.html">Blog configuration</a></li>
+    <li><a href="../articles/article-sources.html">Article sources</a></li>
+    <li><a href="../articles/article-lists.html">Article lists</a></li>
+    <li><a href="../articles/blog-navigation.html">Blog navigation</a></li>
+  </ol>
+

@@ -1,0 +1,87 @@
+%YAML 1.2
+---
+template: blog-article.html
+title: Article sources
+subtitle: An example
+description: "Source files for Website's blog."
+date: 2018-04-19 11:00:00
+tags:
+  - blog
+  - articles
+author: Mike
+content: >-
+  
+  <h2>Article sources</h2>
+
+  <p>Blog source files are located in a subdiretory of the blog
+  defined in the <a
+  href="../articles/blog-configuration.html">configuration</a>.
+  Source file parameters are:</p>
+
+  <dl>
+    <dt><code>template</code></dt>
+    <dd>File name of the Jinja template to use for this page.</dd>
+
+    <dt><code>title</code></dt>
+    <dd>Entry title.</dd>
+
+    <dt><code>subtitle</code></dt>
+    <dd>Entry subtitle. (optional)</dd>
+
+    <dt><code>date</code></dt>
+    <dd>YYYY-MM-DD format. Times are also allowed, using the range
+    00–24 hr and format HH:MM:SS. If times are used, they must be
+    uniformly included in all articles.</dd>
+
+    <dt><code>tags</code></dt>
+    <dd>List of text tags.  Can (probably) be any character allowed as
+    a file name, plus spaces and forward slashes.  The latter are
+    transformed into underscores using the <code>filequote</code>
+    filter.  Thus, the index for the tag labeled <code>open
+    spaces</code> will be <code>tags/open_spaces.html</code>.</dd>
+  </dl>
+  
+  <p>Generated blog pages will have the following variables available
+  in the template:</p>
+  
+  <dl>
+    <dt><code>page_title</code></dt>
+    <dd><code>title</code> from blog configuration.</dd>
+
+    <dt><code>page_subtitle</code></dt>
+    <dd><code>title</code> from the blog article.</dd>
+
+    <dt><code>prev</code></dt>
+    <dd>File name of the previous blog entry by date, or an empty string this is the first article.</dd>
+
+    <dt><code>next</code></dt>
+    <dd>File name of the next blog entry by date, or an empty string this is the last article.</dd>
+
+    <dt><code>blog_nav</code></dt>
+    <dd>The blog navigation.</dd>
+  </dl>
+
+  <p>Article links should be written relative to this location.  The
+  blog index will be the most recent blog entry, located in the base
+  blog path.  For example, if the blog configuration is: <code>path:
+  blog, article-path: articles</code>, then the most recent entry will
+  always be <code>blog/index.html</code>, but remaining articles will
+  be located in <code>blog/articles/</code>.  The links will be
+  corrected using HTML's <code>&lt;base&gt;</code> tag.  As a
+  consequence, blog templates must include <code>{{ base_url }}</code>
+  at the top of the HTML <code>&lt;head&gt;</code> tag:</b>
+
+  <pre><code>&lt;html&gt;
+    &lt;head&gt;
+      {{ base_url }}
+    &lt;/head&gt;
+    &lt;body&gt;
+      &lt;p&gt;Content with link assuming it located in
+      &lt;a href="./"&gt;articles&lt;/a&gt;.&lt;/p&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;</code></pre>
+
+  <p>For implementations that use a common tempate for the blog and
+  root site, it should be safe to use <code>{{ base_url }}</code> in
+  the page header.</p>
+

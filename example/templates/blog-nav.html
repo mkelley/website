@@ -1,0 +1,22 @@
+<nav>
+  <h2>Navigation</h2>
+  <p>Take me to articles tagged:
+    <a href="../articles/">any</a>
+    {% for tag in tags %}
+    <a href="../tags/{{ tag|filequote }}.html">{{ tag }}</a>
+    {% endfor %}
+  </p>
+  <p>Take me to articles with dates:
+    <ul class="blog-dates list-unstyled">
+      {% for year in dates %}
+      <li>{{ year }}
+	<ul>
+	  {% for month in dates[year] %}
+	  <li><a href="../dates/{{ month.filename }}">{{ month.name }}</a></li>
+	  {% endfor %}
+	</ul>
+      </li>
+      {% endfor %}
+    </ul>
+  </p>
+</nav>

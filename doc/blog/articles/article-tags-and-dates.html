@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>Blog: Article tags and dates</title>
+    
+  </head>
+  <body>
+    <h1>Blog: Article tags and dates</h1>
+<main>
+  <header>
+    <h2>Article tags and dates <small>An example</small></h2>
+<label>Tagged</label>
+<ul>
+  <li><a href="../tags/blog.html">blog</a></li>
+  <li><a href="../tags/configuration.html">configuration</a></li>
+</ul>
+<label>Dated:</label> <time>2018-04-19 12:00:00</time>
+  </header>
+<article>
+  <h2>Blog tags</h2>
+<p>Blog tags can (probably) use any characters allowed as a file name, plus spaces and forward slashes.  The tag is transformed into a file name with the <code>filequote</code> filter.  This filter replaces spaces and slashes with the underscore character.  Thus, the index for the tag labeled <code>open spaces</code> will be <code>tags/open_spaces.html</code>.</p>
+<h2>Blog dates</h2>
+<p>Blog dates should be specified with a <code>date</code> parameter in the YAML source files using the YYYY-MM-DD format.  Times are also allowed, using the ragne 00–24 hr and format HH:MM:SS. However, if dates and times are used, they must be uniformly used in all articles.</p>
+</article>
+  <nav>
+  <h2>Navigation</h2>
+  <p>Take me to articles tagged:
+    <a href="../articles/">any</a>
+    <a href="../tags/articles.html">articles</a>
+    <a href="../tags/blog.html">blog</a>
+    <a href="../tags/configuration.html">configuration</a>
+    <a href="../tags/example.html">example</a>
+    <a href="../tags/navigation.html">navigation</a>
+  </p>
+  <p>Take me to articles with dates:
+    <ul class="blog-dates list-unstyled">
+      <li>2018
+	<ul>
+	  <li><a href="../dates/.html"></a></li>
+	</ul>
+      </li>
+    </ul>
+  </p>
+</nav>
+</main>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends "blog.html" %}
+
+{% block header %}
+<label>Tagged</label>
+<ul>
+  {% for tag in tags %}
+  <li><a href="../tags/{{ tag|filequote }}.html">{{ tag }}</a></li>
+  {% endfor %}
+</ul>
+<label>Dated:</label> <time>{{ date }}</time>
+{% endblock %}
+
+{% block content %}
+<article>
+  {{ content }}
+</article>
+{% endblock %}

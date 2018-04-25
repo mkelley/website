@@ -1,0 +1,11 @@
+%YAML 1.2
+---
+template: newsletter-issue.html
+title: First issue
+subtitle: An example
+description: "Minimal working example for a newsletter."
+date: 2018-04-19
+content: >-
+  <p>This newsletter calls its articles 'issues' and does not have a tagging or naviation system.</p>
+
+  <p>See <a href="../issues/index.html">all issues</a>.</p>

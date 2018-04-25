@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title>Blog: Blog configuration</title>
+    
+  </head>
+  <body>
+    <h1><a href="../../index.html">Website Documentation</a></h1>
+    <h2>Blog: Blog configuration</h2>
+<main>
+  <header>
+    <h2>Blog configuration <small>An example</small></h2>
+<label>Tagged</label>
+<ul>
+  <li><a href="../tags/blog.html">blog</a></li>
+  <li><a href="../tags/configuration.html">configuration</a></li>
+</ul>
+<label>Dated:</label> <time>2018-04-19 10:00:00</time>
+  </header>
+<article>
+  
+<p>Each blog is identified and configured with the <code>blogs</code> argument of the <code>Website</code> class.  It uses the following format:</p> <dl>
+  <dt><code>path</code></dt>
+  <dd>Path to the blog, relative to the website root.</dd>
+
+  <dt><code>title</code></dt>
+  <dd>Name of the blog.</dd>
+
+  <dt><code>article-path</code></dt>
+  <dd>Name of the sub-directory containing blog articles/entries.</dd>
+
+  <dt><code>templates</code></dt>
+  <dd>Defines which templates to use for auto-generated blog pages.</dd>
+
+  <dt><code>data</code></dt>
+  <dd>Additional paramters to be passed to blog pages. (optional)</dd>
+</dl>
+<p>The <code>templates</code> parameter contains two items:</p>
+<dl>
+  <dt><code>naviation</code></dt>
+  <dd>Name of the blog navigation template. (optional)</dd>
+
+  <dt><code>article-list</code></dt>
+  <dd>Name of the template for generating article lists.</dd>
+</dl>  
+</article>
+  <nav>
+  <h2>Navigation</h2>
+  <p>Take me to articles tagged:
+    <a href="../articles/">any</a>
+    <a href="../tags/articles.html">articles</a>
+    <a href="../tags/blog.html">blog</a>
+    <a href="../tags/configuration.html">configuration</a>
+    <a href="../tags/navigation.html">navigation</a>
+  </p>
+  <p>Take me to articles with dates:
+    <ul class="blog-dates list-unstyled">
+      <li>2018
+	<ul>
+	  <li><a href="../dates/2018-04.html">Apr</a></li>
+	</ul>
+      </li>
+    </ul>
+  </p>
+</nav>
+</main>
+</body>
+</html>

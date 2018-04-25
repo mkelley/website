@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <title>Blog: Navigation</title>
+    
+  </head>
+  <body>
+    <h1><a href="../../index.html">Website Documentation</a></h1>
+    <h2>Blog: Navigation</h2>
+<main>
+  <header>
+    <h2>Navigation <small>An example</small></h2>
+<label>Tagged</label>
+<ul>
+  <li><a href="../tags/blog.html">blog</a></li>
+  <li><a href="../tags/configuration.html">configuration</a></li>
+</ul>
+<label>Dated:</label> <time>2018-04-19 14:00:00</time>
+  </header>
+<article>
+  
+<h2>Blog navigation</h2>
+<p>Blog navigation is generated once and used on every blog page. In addition to the ususual blog <code>data</code>, three variables are passed to the navigation template, specified in the <a href="../articles/blog-config.html">blog config</a>:</p>
+<dl>
+  <dt><code>tags</code></dt>
+  <dd>List of all tag text, sorted by lowercase value.</dd>
+
+  <dt><code>dates</code></dt> <dd>Dictionary of years, each a list
+  of dictionaries with two values: <code>filename</code>, the file
+  name of the year-month combo (2018-04.html); and,
+  <code>name</code>, a three-letter abbreviation for the month.  The
+  dates are sorted in reverse time.</dd>
+
+  <dt><code>entries</code></dt>
+  <dd>List of all blog entries.</dd>
+</dl>
+<p>Since the blog navigation can be in any blog directory (<code>article-path</code> from the blog configuration, <code>tags</code>, or <code>dates</code>), blog links in the navigation should be written with a <code>../</code> prefix.  For example, blog tags could be programmed as the following list:</p>
+<pre><code>&lt;ul&gt;
+  {% for tag in tags %}
+  &lt;li&gt;&lt;a href="../tags/{{ tag|filequote }}"&gt;{{ tag }}&lt;a&gt;&lt;li&gt;
+  {% endfor %}
+&lt;ul&gt;</code></pre>
+</article>
+  <nav>
+  <h2>Navigation</h2>
+  <p>Take me to articles tagged:
+    <a href="../articles/">any</a>
+    <a href="../tags/articles.html">articles</a>
+    <a href="../tags/blog.html">blog</a>
+    <a href="../tags/configuration.html">configuration</a>
+    <a href="../tags/navigation.html">navigation</a>
+  </p>
+  <p>Take me to articles with dates:
+    <ul class="blog-dates list-unstyled">
+      <li>2018
+	<ul>
+	  <li><a href="../dates/2018-04.html">Apr</a></li>
+	</ul>
+      </li>
+    </ul>
+  </p>
+</nav>
+</main>
+</body>
+</html>

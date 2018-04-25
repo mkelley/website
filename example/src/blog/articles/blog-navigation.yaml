@@ -1,0 +1,45 @@
+%YAML 1.2
+---
+template: blog-article.html
+title: Navigation
+subtitle: An example
+description: "Website's blog navigation."
+date: 2018-04-19 14:00:00
+tags:
+  - blog
+  - configuration
+author: Mike
+content: >-
+
+  <h2>Blog navigation</h2>
+
+  <p>Blog navigation is generated once and used on every blog page.
+  In addition to the ususual blog <code>data</code>, three variables
+  are passed to the navigation template, specified in the <a
+  href="../articles/blog-config.html">blog config</a>:</p>
+
+  <dl>
+    <dt><code>tags</code></dt>
+    <dd>List of all tag text, sorted by lowercase value.</dd>
+
+    <dt><code>dates</code></dt> <dd>Dictionary of years, each a list
+    of dictionaries with two values: <code>filename</code>, the file
+    name of the year-month combo (2018-04.html); and,
+    <code>name</code>, a three-letter abbreviation for the month.  The
+    dates are sorted in reverse time.</dd>
+
+    <dt><code>entries</code></dt>
+    <dd>List of all blog entries.</dd>
+  </dl>
+
+  <p>Since the blog navigation can be in any blog directory
+  (<code>article-path</code> from the blog configuration,
+  <code>tags</code>, or <code>dates</code>), blog links in the
+  navigation should be written with a <code>../</code> prefix.  For
+  example, blog tags could be programmed as the following list:</p>
+
+  <pre><code>&lt;ul&gt;
+    {% for tag in tags %}
+    &lt;li&gt;&lt;a href="../tags/{{ tag|filequote }}"&gt;{{ tag }}&lt;a&gt;&lt;li&gt;
+    {% endfor %}
+  &lt;ul&gt;</code></pre>

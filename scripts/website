@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+
+if __name__ == '__main__':
+    import os
+    import argparse
+    import yaml
+    import website
+
+    parser = argparse.ArgumentParser(
+        description='Website generator.',
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('-s', default='src', help='source directory')
+    parser.add_argument('-t', default='templates', help='template directory')
+    parser.add_argument('-c', default='config.yaml', help='configuration file')
+    parser.add_argument('-o', default='html', help='output directory')
+    parser.add_argument('--example', action='store_true',
+                        help='print an example configuration file')
+    parser.add_argument('-y',
+                        help='Load pyyaml objects from this Python module.')
+    args = parser.parse_args()
+
+    if args.example:
+        print('''%YAML 1.2
+---
+blogs:
+  - path: blog
+    title: Blog
+    article-path: articles
+    templates:
+      navigation: blog-nav.html
+      article-list: blog-article-list.html
+  - path: newsletter
+    title: Newsletter
+    article-path: issues
+    templates:
+      article-list: newsletter-issue-list.html
+valid-files:
+  - .css
+  - .png
+  - .jpg
+  - .html
+  - .js
+''')
+        exit()
+    
+    assert os.path.isdir(args.s), '{} is not a directory'.format(args.s)
+    assert os.path.isdir(args.t), '{} is not a directory'.format(args.t)
+    assert os.path.isfile(args.c), '{} is not a file'.format(args.c)
+
+    if args.y is not None:
+        print('loading PyYAML objects')
+        exec('from {} import *'.format(args.y))
+    
+    with open(args.c) as f:
+        config = yaml.load(f)
+
+    w = website.Website(args.o, args.t, args.s, config['blogs'],
+                    config['valid-files'])
+    w.generate()

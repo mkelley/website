@@ -1,0 +1,9 @@
+# Website
+
+Website generation with special consideration for blog-style sections.
+
+Requires: Jinja2, pyyaml
+
+The documentation is provided as an example website in doc/ with
+source files in example/.  Re-generate the documentation from the base
+directory via `website -s example/src -t example/templates -c example/config.yaml -o doc/` or `setup.py build_doc`.

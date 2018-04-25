@@ -1,0 +1,12 @@
+{% extends "blog.html" %}
+{% block content %}
+<section class="row">
+  <ul>
+    {% for entry in entries|sort(attribute='date')|reverse %}
+    <li>
+      <a href="../issues/{{ entry.filename|basename }}">{{ entry.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

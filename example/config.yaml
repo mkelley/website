@@ -1,0 +1,20 @@
+%YAML 1.2
+---
+blogs:
+  - path: blog
+    title: Blog
+    article-path: articles
+    templates:
+      navigation: blog-nav.html
+      article-list: blog-article-list.html
+  - path: newsletter
+    title: Newsletter
+    article-path: issues
+    templates:
+      article-list: newsletter-issue-list.html
+valid-files:
+  - .css
+  - .png
+  - .jpg
+  - .html
+  - .js

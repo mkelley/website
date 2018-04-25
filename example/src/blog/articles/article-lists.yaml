@@ -1,0 +1,31 @@
+%YAML 1.2
+---
+template: blog-article.html
+title: Article lists
+subtitle: An example
+description: "Templating lists of articles for Website's blog."
+date: 2018-04-19 13:00:00
+tags:
+  - blog
+  - articles
+  - navigation
+author: Mike
+content: >-
+  <h2>Article lists</h2>
+
+  <p>A list of all articles is generated with the
+  <code>article-list</code> template specified in the blog
+  configuration, and saved to <code>{article-path}/index.html</code>.
+  The same template is used to generate tag and date indices.</p>
+
+  <p>The blog entries will be provided to the template in a list named
+  <code>entries</code>.  Use the <code>filename</code> attribute and
+  <code>basename</code> filter to create a link to each entry for the
+  list:</p>
+
+  <pre><code>&lt;ul&gt;
+    {% for entry in entries %}
+    &lt;li&gt;&lt;a href="../articles/{{ entry.filename|basename }}"&gt;{{ entry.title }}&lt;/a&gt;&lt;/li&gt;
+    {% endfor %}
+  &lt;/ul&gt;</code></pre>
+  

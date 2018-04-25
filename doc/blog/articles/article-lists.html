@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>Blog: Article lists</title>
+    
+  </head>
+  <body>
+    <h1><a href="../../index.html">Website Documentation</a></h1>
+    <h2>Blog: Article lists</h2>
+<main>
+  <header>
+    <h2>Article lists <small>An example</small></h2>
+<label>Tagged</label>
+<ul>
+  <li><a href="../tags/blog.html">blog</a></li>
+  <li><a href="../tags/articles.html">articles</a></li>
+  <li><a href="../tags/navigation.html">navigation</a></li>
+</ul>
+<label>Dated:</label> <time>2018-04-19 13:00:00</time>
+  </header>
+<article>
+  <h2>Article lists</h2>
+<p>A list of all articles is generated with the <code>article-list</code> template specified in the blog configuration, and saved to <code>{article-path}/index.html</code>. The same template is used to generate tag and date indices.</p>
+<p>The blog entries will be provided to the template in a list named <code>entries</code>.  Use the <code>filename</code> attribute and <code>basename</code> filter to create a link to each entry for the list:</p>
+<pre><code>&lt;ul&gt;
+  {% for entry in entries %}
+  &lt;li&gt;&lt;a href="../articles/{{ entry.filename|basename }}"&gt;{{ entry.title }}&lt;/a&gt;&lt;/li&gt;
+  {% endfor %}
+&lt;/ul&gt;</code></pre>
+</article>
+  <nav>
+  <h2>Navigation</h2>
+  <p>Take me to articles tagged:
+    <a href="../articles/">any</a>
+    <a href="../tags/articles.html">articles</a>
+    <a href="../tags/blog.html">blog</a>
+    <a href="../tags/configuration.html">configuration</a>
+    <a href="../tags/navigation.html">navigation</a>
+  </p>
+  <p>Take me to articles with dates:
+    <ul class="blog-dates list-unstyled">
+      <li>2018
+	<ul>
+	  <li><a href="../dates/2018-04.html">Apr</a></li>
+	</ul>
+      </li>
+    </ul>
+  </p>
+</nav>
+</main>
+</body>
+</html>

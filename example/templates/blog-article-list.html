@@ -1,0 +1,15 @@
+{% extends "blog.html" %}
+{% block content %}
+<section class="row">
+  <ul>
+    {% for entry in entries|sort(attribute='date')|reverse %}
+    <li>
+      <h3><a href="../articles/{{ entry.filename|basename }}">{{ entry.title }}</a></h3>
+      {% for tag in entry.tags %}
+      <a href="../tags/{{ tag|filequote }}.html">{{ tag }}</a>
+      {% endfor %}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

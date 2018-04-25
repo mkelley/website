@@ -1,0 +1,11 @@
+{% extends "newsletter.html" %}
+
+{% block header %}
+<label>Dated:</label> <time>{{ date }}</time>
+{% endblock %}
+
+{% block content %}
+<article>
+  {{ content }}
+</article>
+{% endblock %}
