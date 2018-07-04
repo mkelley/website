@@ -1,6 +1,7 @@
 # Licensed under a MIT style license - see LICENSE
 import os
 
+
 class Website:
     """Website generator.
 
@@ -37,6 +38,7 @@ class Website:
       Additional parameters to pass to blog templates.
 
     """
+
     def __init__(self, target, templates, source, blogs, valid_files):
         self.target = os.path.normpath(target)
         self.templates = os.path.normpath(templates)
@@ -154,7 +156,12 @@ class Website:
 
         # other pages
         for other in others:
-            self.render(other, **opts)
+            if isinstance(other, tuple):
+                src, tgt = other
+                print('  W', tgt)
+                shutil.copy(src, tgt)
+            else:
+                self.render(other, **opts)
 
         # blog entries
         opts['page_title'] = blog['title']
@@ -179,12 +186,11 @@ class Website:
         opts['base_url'] = '<base href={}>'.format(os.path.join(
             blog['article-path'], os.path.basename(entry['filename'])))
         html = self.render(recent, save=False, **opts)
-        
+
         fn = os.path.join(self.target, blog['path'], 'index.html')
         print('  W', fn)
         with open(fn, 'w') as outf:
             outf.write(html)
-        
 
     def generate_pages(self):
         """Generate all non-blog pages."""
@@ -192,7 +198,7 @@ class Website:
         import shutil
 
         print('Writing non-blog pages.')
-        
+
         files = self.files
         for blog in self.blogs:
             files = files.files_not_in(blog['path'])
@@ -214,7 +220,7 @@ class Website:
           Website's path to blog.
         article_path
           Name of article directory.
-        
+
         Returns
         -------
         entries : list of dict
@@ -234,6 +240,10 @@ class Website:
         articles = self.files.files_in(os.path.join(path, article_path))
 
         for src, tgt in blog_files.items():
+            if not src.endswith('.yaml'):
+                others.append((src, tgt))
+                continue
+
             data = self.read_yaml(src, tgt)
             print('  L', data.get('title', data.get('page_title')))
             if src in articles.source_files:
@@ -274,7 +284,8 @@ class Website:
 
         page_data['filename'] = tgt
         if page_data['filename'].startswith(self.target):
-            page_data['filename'] = page_data['filename'][len(self.target) + 1:]
+            page_data['filename'] = page_data['filename'][len(
+                self.target) + 1:]
 
         return page_data
 
@@ -313,7 +324,8 @@ class Website:
         tgt = os.path.join(self.target, page_data['filename'])
         template = self.env.get_template(page_data['template'])
         parameters = dict(**kwargs)
-        parameters['root_path'] = parameters.get('root_path', self.relpath(tgt))
+        parameters['root_path'] = parameters.get(
+            'root_path', self.relpath(tgt))
         html = template.render(page_data, **parameters)
         if save:
             print('  W', tgt)
@@ -336,7 +348,7 @@ class Website:
         from jinja2 import Environment, FileSystemLoader
         file_loader = FileSystemLoader(self.templates)
         self.env = Environment(loader=file_loader, trim_blocks=True,
-                          lstrip_blocks=True)
+                               lstrip_blocks=True)
         self.env.filters['filequote'] = filequote
         self.env.filters['basename'] = basename
 
@@ -393,6 +405,7 @@ class Website:
             })
             self.render(index)
 
+
 class FileSet:
     """Website source and target file pairs.
 
@@ -417,6 +430,7 @@ class FileSet:
     files_not_in : New `FileSet` without files in a given directory.
 
     """
+
     def __init__(self, target_path, source_path):
         self.target_path = os.path.normpath(target_path)
         self.source_path = os.path.normpath(source_path)
@@ -446,7 +460,7 @@ class FileSet:
 
     def items(self):
         return self._files.items()
-    
+
     @property
     def source_files(self):
         return self._files.keys()
@@ -483,22 +497,25 @@ class FileSet:
                 files.append(f)
         return files
 
+
 num2mon = {}
 for i, m in enumerate('Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split()):
     num2mon[i + 1] = m
 del i, m
+
 
 def ym2MonYYYY(ym):
     '''2018-08 -> Aug 2018'''
     y, m = ym.split('-')
     return '{} {}'.format(num2mon[int(m)], y)
 
+
 def filequote(text):
     """Transform text to file name."""
     trans = str.maketrans(' /()', '____')
     return text.translate(trans)
 
+
 def basename(url):
     from urllib.parse import urlparse
     return os.path.basename(urlparse(url).path)
-
