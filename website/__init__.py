@@ -351,6 +351,7 @@ class Website:
                                lstrip_blocks=True)
         self.env.filters['filequote'] = filequote
         self.env.filters['basename'] = basename
+        self.env.filters['dateconv'] = dateconv
 
     def setup_target(self):
         """Create full target directory tree."""
@@ -519,3 +520,8 @@ def filequote(text):
 def basename(url):
     from urllib.parse import urlparse
     return os.path.basename(urlparse(url).path)
+
+
+def dateconv(date, from_format, to_format):
+    from datetime import datetime
+    return datetime.strptime(date, from_format).strftime(to_format)
