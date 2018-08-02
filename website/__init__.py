@@ -178,7 +178,11 @@ class Website:
                 opts['next'] = basename(entries[i + 1]['filename'])
 
             root_path = self.relpath(entry['filename'])
-            self.render(entry, **opts)
+            try:
+                self.render(entry, **opts)
+            except:
+                print('  E', entry['filename'])
+                raise
 
         # regenerate recent entry with base_url and save to blog
         # index, but keep 'filename' the same.
@@ -206,9 +210,12 @@ class Website:
         for src, tgt in files.items():
             if src.endswith('yaml'):
                 page_data = self.read_yaml(src, tgt)
-                self.render(page_data)
+                try:
+                    self.render(page_data)
+                except:
+                    print('  E', tgt)
+                    raise
             else:
-                print('  W', tgt)
                 shutil.copy(src, tgt)
 
     def read_blog(self, path, article_path):
