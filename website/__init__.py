@@ -284,7 +284,7 @@ class Website:
         """
         import yaml
         with open(src) as inf:
-            page_data = yaml.load(inf)
+            page_data = yaml.load(inf, Loader=yaml.BaseLoader)
 
         if tgt is None:
             tgt = os.path.normpath(src)[len(self.source) + 1:]

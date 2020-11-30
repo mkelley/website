@@ -42,7 +42,7 @@ valid-files:
   - .js
 ''')
         exit()
-    
+
     assert os.path.isdir(args.s), '{} is not a directory'.format(args.s)
     assert os.path.isdir(args.t), '{} is not a directory'.format(args.t)
     assert os.path.isfile(args.c), '{} is not a file'.format(args.c)
@@ -50,10 +50,10 @@ valid-files:
     if args.y is not None:
         print('loading PyYAML objects')
         exec('from {} import *'.format(args.y))
-    
+
     with open(args.c) as f:
-        config = yaml.load(f)
+        config = yaml.load(f, Loader=yaml.BaseLoader)
 
     w = website.Website(args.o, args.t, args.s, config['blogs'],
-                    config['valid-files'])
+                        config['valid-files'])
     w.generate()
