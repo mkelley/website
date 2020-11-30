@@ -524,4 +524,6 @@ def basename(url):
 
 def dateconv(date, from_format, to_format):
     from datetime import datetime
+    if date is None:
+        return ''
     return datetime.strptime(date, from_format).strftime(to_format)
